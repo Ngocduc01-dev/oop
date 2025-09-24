@@ -13,5 +13,6 @@ public class Introduction {
         System.out.println("1 bottle of beer on the wall, 1 bottle of beer.");
         System.out.println("Take one down, pass it around,");
         System.out.println("No more bottles of beer on the wall.");
+        System.out.println("");
     }
 }
