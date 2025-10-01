@@ -20,7 +20,25 @@ public class CharGrid {
 	 * @return area for given char
 	 */
 	public int charArea(char ch) {
-		return 0; // YOUR CODE HERE
+        int rows = grid.length;
+        int cols = grid[0].length;
+
+        int minRow = rows, maxRow = -1;
+        int minCol = cols, maxCol = -1;
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == ch) {
+                    if (i < minRow) minRow = i;
+                    if (i > maxRow) maxRow = i;
+                    if (j < minCol) minCol = j;
+                    if (j > maxCol) maxCol = j;
+
+                }
+            }
+        }
+        if (maxRow == -1) return 0;
+        return (maxRow - minRow + 1) * (maxCol - minCol + 1); // YOUR CODE HERE
 	}
 	
 	/**
@@ -28,7 +46,78 @@ public class CharGrid {
 	 * @return number of + in grid
 	 */
 	public int countPlus() {
-		return 0; // YOUR CODE HERE
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int count = 0;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                char ch = grid[i][j];
+                int armLen = armLength(i,j,ch);
+                if (armLen >= 2) {
+                    count++;
+                }
+            }
+        }
+        return count; // YOUR CODE HERE
 	}
-	
+
+    /**
+     * Tính độ dài nhánh chữ thập với tâm (r,c) và ký tự ch.
+     * Trả về chiều dài nhánh nếu 4 nhánh bằng nhau, ngược lại trả về -1.
+     */
+    private int armLength(int r, int c, char ch) {
+        if (c >= grid[r].length || grid[r][c] != ch) return -1;
+
+        int up = 0, down = 0, left = 0, right = 0;
+
+        // lên
+        for (int i = r - 1; i >= 0; i--) {
+            if (c < grid[i].length && grid[i][c] == ch) up++;
+            else break;
+        }
+        // xuống
+        for (int i = r + 1; i < grid.length; i++) {
+            if (c < grid[i].length && grid[i][c] == ch) down++;
+            else break;
+        }
+        // trái
+        for (int j = c - 1; j >= 0 && grid[r][j] == ch; j--) left++;
+        // phải
+        for (int j = c + 1; j < grid[r].length && grid[r][j] == ch; j++) right++;
+
+        if (up >= 1 && up == down && up == left && up == right) {
+            return up;
+        }
+        return -1;
+    }
+
+
+
+
+
+    public static void main(String[] args) {
+        char[][] grid1 = {
+                {'a', 'b', 'c', 'd'},
+                {'a', ' ', 'c', 'b'},
+                {'x', 'b', 'c', 'a'}
+        };
+
+        CharGrid cg1 = new CharGrid(grid1);
+        System.out.println("Area of 'a': " + cg1.charArea('a')); // 12
+        System.out.println("Area of 'c': " + cg1.charArea('c')); // 3
+        System.out.println("Area of 'z': " + cg1.charArea('z')); // 0
+
+        char[][] grid2 = {
+                {' ', ' ', 'p', ' ', ' ', ' ', 'x', ' ', ' '},
+                {' ', ' ', 'p', ' ', ' ', ' ', 'x', ' ', ' '},
+                {'p', 'p', 'p', 'p', 'p', ' ', 'x', 'x', 'x'},
+                {' ', ' ', 'p', ' ', ' ', 'y', ' ', 'x', ' '},
+                {' ', ' ', 'p', ' ', 'y', 'y', 'y', ' ', ' '},
+                {'z', 'z', 'z', 'z', 'z', 'y', 'z', 'z', 'z'},
+                {' ', ' ', 'x', 'x', ' ', 'y', ' ', ' ', ' '}
+        };
+
+        CharGrid cg2 = new CharGrid(grid2);
+        System.out.println("Count plus: " + cg2.countPlus()); // 2
+    }
 }
