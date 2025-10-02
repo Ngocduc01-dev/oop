@@ -53,21 +53,5 @@ public class TetrisGrid {
 
         return grid; // YOUR CODE HERE
 	}
-    public static void main(String[] args) {
-        boolean[][] grid = {
-                {false, false, true},
-                {true,  true,  true}
-        };
-        TetrisGrid tg = new TetrisGrid(grid);
-
-        tg.clearRows();
-
-        boolean[][] result = tg.getGrid();
-        for (int y = result[0].length - 1; y >= 0; y--) {
-            for (int x = 0; x < result.length; x++) {
-                System.out.print(result[x][y] ? "X " : ". ");
-            }
-            System.out.println();
-        }
-    }
+    public static void main (String[] args) {}
 }
