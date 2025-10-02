@@ -90,34 +90,6 @@ public class CharGrid {
         }
         return -1;
     }
+        public static void main (String[] args) {}
 
-
-
-
-
-    public static void main(String[] args) {
-        char[][] grid1 = {
-                {'a', 'b', 'c', 'd'},
-                {'a', ' ', 'c', 'b'},
-                {'x', 'b', 'c', 'a'}
-        };
-
-        CharGrid cg1 = new CharGrid(grid1);
-        System.out.println("Area of 'a': " + cg1.charArea('a')); // 12
-        System.out.println("Area of 'c': " + cg1.charArea('c')); // 3
-        System.out.println("Area of 'z': " + cg1.charArea('z')); // 0
-
-        char[][] grid2 = {
-                {' ', ' ', 'p', ' ', ' ', ' ', 'x', ' ', ' '},
-                {' ', ' ', 'p', ' ', ' ', ' ', 'x', ' ', ' '},
-                {'p', 'p', 'p', 'p', 'p', ' ', 'x', 'x', 'x'},
-                {' ', ' ', 'p', ' ', ' ', 'y', ' ', 'x', ' '},
-                {' ', ' ', 'p', ' ', 'y', 'y', 'y', ' ', ' '},
-                {'z', 'z', 'z', 'z', 'z', 'y', 'z', 'z', 'z'},
-                {' ', ' ', 'x', 'x', ' ', 'y', ' ', ' ', ' '}
-        };
-
-        CharGrid cg2 = new CharGrid(grid2);
-        System.out.println("Count plus: " + cg2.countPlus()); // 2
-    }
 }
